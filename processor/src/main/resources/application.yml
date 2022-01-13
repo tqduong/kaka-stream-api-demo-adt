@@ -1,0 +1,47 @@
+spring.cloud.stream:
+  function:
+    definition: relativeHumdityProcessor;rhConsumer, comfortConsumer
+  bindings:
+    relativeHumdityProcessor-in-0:
+      destination: temperature-sensor-topic
+    relativeHumdityProcessor-in-1:
+      destination: dewpoint-sensor-topic
+    relativeHumdityProcessor-out-0:
+      destination: relative-humidity-topic
+    rhConsumer-in-0:
+      destination: relative-humidity-topic
+    comfortConsumer-in-0:
+      destination: relative-humidity-topic
+  kafka:
+    bindings:
+      relativeHumdityProcessor-in-0:
+        consumer:
+          configuration:
+            value:
+              deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+      relativeHumdityProcessor-out-0:
+        producer:
+          configuration:
+            value:
+              serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#    binder:
+#      brokers:
+#        - localhost:9091
+#        - localhost:9092
+    streams:
+      binder:
+        brokers: pkc-ep9mm.us-east-2.aws.confluent.cloud:9092
+        configuration:
+          default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+          default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+          ssl.endpoint.identification.algorithm: https
+          sasl.mechanism: PLAIN
+          request.timeout.ms: 20000
+          retry.backoff.ms: 500
+          sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule   required username='3SZ2RNIQDLP3CBNG'   password='KWuqALWoiezJ8mrMdh3TRIajXSzbEl6geLuU/lMoGb3M5ZWl7Eu2/5XHunM4ONTu';
+          security.protocol: SASL_SSL
+          commit.interval.ms: 100
+          # Confluent Cloud Schema Registry
+          basic.auth.credentials.source: USER_INFO
+          basic.auth.user.info: DUYK5GJTSKPRHDPY:0MJe/3CuO7YoHpp1NSGKTQD8mLD7LoYNeFyeB9bkLXK1oJRQInbt5ihQRtpxTjaV
+          schema.registry.url: https://psrc-vrpp5.us-east-2.aws.confluent.cloud

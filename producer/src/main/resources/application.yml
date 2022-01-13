@@ -1,0 +1,82 @@
+spring:
+  cloud:
+    stream:
+      function:
+          definition: dewpointSensorSupplier;temperatureSensorSupplier
+      bindings:
+        temperatureSensorSupplier-out-0:
+          content-type: application/*+avro
+          destination: temperature-sensor-topic
+          producer:
+            useNativeEncoding: true
+            content-type: application/*+avro
+        dewpointSensorSupplier-out-0:
+          content-type: application/*+avro
+          destination: dewpoint-sensor-topic
+          producer:
+            useNativeEncoding: true
+            content-type: application/*+avro
+      kafka:
+        binder:
+          brokers: pkc-ep9mm.us-east-2.aws.confluent.cloud:9092
+          configuration:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+            # Kafka
+            sasl.mechanism: PLAIN
+            sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule   required username='IBILHJMPWBTGAATA'   password='YK06U6ssD5LYIO3o+0STSUmOC6JFaa7gf/pLjA+wSUHhc0EA40d978fngsQ3RAc/';
+            security.protocol: SASL_SSL
+            # Confluent Cloud Schema Registry
+            basic.auth.credentials.source: USER_INFO
+            basic.auth.user.info: DUYK5GJTSKPRHDPY:0MJe/3CuO7YoHpp1NSGKTQD8mLD7LoYNeFyeB9bkLXK1oJRQInbt5ihQRtpxTjaV
+            schema.registry.url: https://psrc-vrpp5.us-east-2.aws.confluent.cloud
+        bindings:
+          temperatureSensorSupplier-out-0:
+            producer:
+              useNativeEncoding: true
+              configuration:
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                # Kafka
+                sasl.mechanism: PLAIN
+                sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule   required username='IBILHJMPWBTGAATA'   password='YK06U6ssD5LYIO3o+0STSUmOC6JFaa7gf/pLjA+wSUHhc0EA40d978fngsQ3RAc/';
+                security.protocol: SASL_SSL
+                # Confluent Cloud Schema Registry
+                basic.auth.credentials.source: USER_INFO
+                basic.auth.user.info: DUYK5GJTSKPRHDPY:0MJe/3CuO7YoHpp1NSGKTQD8mLD7LoYNeFyeB9bkLXK1oJRQInbt5ihQRtpxTjaV
+                schema.registry.url: https://psrc-vrpp5.us-east-2.aws.confluent.cloud
+          dewpointSensorSupplier-out-0  :
+            producer:
+              useNativeEncoding: true
+              configuration:
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                # Kafka
+                sasl.mechanism: PLAIN
+                sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule   required username='IBILHJMPWBTGAATA'   password='YK06U6ssD5LYIO3o+0STSUmOC6JFaa7gf/pLjA+wSUHhc0EA40d978fngsQ3RAc/';
+                security.protocol: SASL_SSL
+                # Confluent Cloud Schema Registry
+                basic.auth.credentials.source: USER_INFO
+                basic.auth.user.info: DUYK5GJTSKPRHDPY:0MJe/3CuO7YoHpp1NSGKTQD8mLD7LoYNeFyeB9bkLXK1oJRQInbt5ihQRtpxTjaV
+                schema.registry.url: https://psrc-vrpp5.us-east-2.aws.confluent.cloud
+server.port: 9010
+
+
+
+#spring.cloud:
+#  stream:
+#    function.definition: process
+#    bindings:
+#      process-in-0:
+#        destination: topic1
+#        group: group1
+#      process-out-0:
+#        destination: topic2
+#        producer:
+#          useNativeEncoding: true
+#    kafka:
+#      bindings:
+#        process-out-0:
+#          producer:
+#            configuration:
+#              value.serializer: org.springframework.kafka.support.serializer.JsonSerializer

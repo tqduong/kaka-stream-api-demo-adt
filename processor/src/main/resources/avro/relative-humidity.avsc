@@ -1,0 +1,10 @@
+{
+  "namespace" : "com.example",
+  "type" : "record",
+  "name" : "RelativeHumidity",
+  "fields" : [
+    {"name":"id","type":"string"},
+    {"name":"location","type":"string"},
+    {"name":"relativeHumidity","type":"float","default":0.0}
+  ]
+}
